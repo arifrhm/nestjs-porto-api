@@ -1,6 +1,7 @@
 // src/entities/unique-post.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Post } from './post.entity';
+import { Tag } from './tag.entity';
 
 @Entity()
 export class UniquePost {
@@ -24,4 +25,7 @@ export class UniquePost {
 
   @ManyToOne(() => Post, (post) => post.uniquePosts)
   post: Post;
+
+  @OneToMany(() => Tag, (tag) => tag.uniquePost)
+  tags: Tag[];
 }

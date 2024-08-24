@@ -1,6 +1,7 @@
 // src/entities/post.entity.ts
-import { Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 import { UniquePost } from './unique-post.entity';
+import { Tag } from './tag.entity';
 
 @Entity()
 export class Post {
@@ -11,4 +12,7 @@ export class Post {
     cascade: true,
   })
   uniquePosts: UniquePost[];
+
+  @ManyToMany(() => Tag, (tag) => tag.posts)
+  tags: Tag[];
 }
